@@ -27,10 +27,8 @@ int main(int argc, char** argv, char** envp)
 	}
 
       window.clear();
-      window.draw(l1);
-      window.draw(l2);
-      window.draw(l3);
-      window.draw(l4);
+      for (sf::VertexArray va : lines)
+	window.draw(va);
       window.display();
     }
 
