@@ -1,7 +1,7 @@
 CXX      = c++
 LDFLAGS  = -lsfml-window -lsfml-system -lsfml-graphics
 CXXFLAGS = -g -std=c++17
-OBJS     = main.o
+OBJS     = board.o main.o
 OUT      = tictactoe
 
 all:     build

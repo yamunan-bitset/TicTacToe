@@ -1,17 +1,16 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+
+#include "sprite.hh"
+#include "board.hh"
 
 int main(int argc, char** argv, char** envp)
 {
+  Lines line;
   sf::RenderWindow window(sf::VideoMode(900, 900), "Tic Tac Toe");
-  sf::Clock clock;
 
-  sf::Texture x, o;
-  x.loadFromFile("x.png");
-  o.loadFromFile("o.png");
-  sf::Sprite x_s(x), o_s(o);
-  
-#include "board.hh"
-  
+  bool draw_x = false, draw_o = false;
+  float x_pos, y_pos;
   sf::Event event;
   while (window.isOpen())
     {
@@ -22,13 +21,36 @@ int main(int argc, char** argv, char** envp)
 	    case sf::Event::Closed:
 	      window.close();
 	      break;
+	    case sf::Event::MouseButtonPressed:
+	      switch (event.mouseButton.button)
+		{
+		case sf::Mouse::Right:
+		  draw_x = true;
+		  x_pos  = event.mouseButton.x;
+		  y_pos  = event.mouseButton.y;
+		  break;
+		case sf::Mouse::Left:
+		  draw_o = true;
+		  x_pos = event.mouseButton.x;
+		  y_pos = event.mouseButton.y;
+		  break;
+		default: break;
+		}
+	      break;
 	    default: break;
 	    }
 	}
 
       window.clear();
-      for (sf::VertexArray va : lines)
+      for (sf::VertexArray va : line.lines)
 	window.draw(va);
+      
+      if (draw_x)
+	window.draw(CreateX(x_pos, y_pos));
+
+      if (draw_o)
+	window.draw(CreateO(x_pos, y_pos));
+      
       window.display();
     }
 
