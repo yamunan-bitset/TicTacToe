@@ -1,6 +1,7 @@
 sf::VertexArray CreateX(float x_pos, float y_pos)
 {
-  sf::VertexArray x;
+  // Length: 50px TODO
+  sf::VertexArray x;//TODO:first_line, second_line;
   x.setPrimitiveType(sf::Lines);
   x.resize(2);
   x[0].position = sf::Vector2f(x_pos, y_pos);
@@ -10,14 +11,13 @@ sf::VertexArray CreateX(float x_pos, float y_pos)
   return x;
 }
 
-sf::VertexArray CreateO(float x_pos, float y_pos)
+sf::CircleShape CreateO(float x_pos, float y_pos)
 {
-  sf::VertexArray o;
-  o.setPrimitiveType(sf::Lines);
-  o.resize(2);
-  o[0].position = sf::Vector2f(x_pos, y_pos);
-  o[0].color    = sf::Color(sf::Color::White);
-  o[1].position = sf::Vector2f(0, 0);
-  o[1].color    = sf::Color(sf::Color::White);
+  // Radius: 50px
+  sf::CircleShape o(50);
+  o.setFillColor(sf::Color::Black);
+  o.setOutlineThickness(1);
+  o.setOutlineColor(sf::Color::White);
+  o.setPosition(x_pos, y_pos);
   return o;
 }

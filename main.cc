@@ -26,11 +26,13 @@ int main(int argc, char** argv, char** envp)
 		{
 		case sf::Mouse::Right:
 		  draw_x = true;
+		  draw_o = false;
 		  x_pos  = event.mouseButton.x;
 		  y_pos  = event.mouseButton.y;
 		  break;
 		case sf::Mouse::Left:
 		  draw_o = true;
+		  draw_x = false;
 		  x_pos = event.mouseButton.x;
 		  y_pos = event.mouseButton.y;
 		  break;
