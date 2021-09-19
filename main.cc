@@ -7,6 +7,7 @@
 int main(int argc, char** argv, char** envp)
 {
   Lines line;
+  
   sf::RenderWindow window(sf::VideoMode(900, 900), "Tic Tac Toe");
 
   bool draw_x = false, draw_o = false;
@@ -48,8 +49,13 @@ int main(int argc, char** argv, char** envp)
 	window.draw(va);
       
       if (draw_x)
-	window.draw(CreateX(x_pos, y_pos));
-
+	{
+	  window.draw(CreateX1(x_pos, y_pos));
+	  window.draw(CreateX2(x_pos, y_pos));
+	  window.draw(CreateX3(x_pos, y_pos));
+	  window.draw(CreateX4(x_pos, y_pos));
+	}
+      
       if (draw_o)
 	window.draw(CreateO(x_pos, y_pos));
       
