@@ -48,16 +48,24 @@ int main(int argc, char** argv, char** envp)
       for (sf::VertexArray va : line.lines)
 	window.draw(va);
       
+      int x_corrected, y_corrected;
+      if (x_pos <= 300) x_corrected = 150;
+      if (y_pos <= 300) y_corrected = 150;
+      if (x_pos >= 300 && x_pos <= 600) x_corrected = 450;
+      if (y_pos >= 300 && y_pos <= 600) y_corrected = 450;
+      if (x_pos >= 600 && x_pos <= 900) x_corrected = 750;
+      if (y_pos >= 600 && y_pos <= 900) y_corrected = 750;
+      
       if (draw_x)
 	{
-	  window.draw(CreateX1(x_pos, y_pos));
-	  window.draw(CreateX2(x_pos, y_pos));
-	  window.draw(CreateX3(x_pos, y_pos));
-	  window.draw(CreateX4(x_pos, y_pos));
+	  window.draw(CreateX1(x_corrected, y_corrected));
+	  window.draw(CreateX2(x_corrected, y_corrected));
+	  window.draw(CreateX3(x_corrected, y_corrected));
+	  window.draw(CreateX4(x_corrected, y_corrected));
 	}
       
       if (draw_o)
-	window.draw(CreateO(x_pos, y_pos));
+	window.draw(CreateO(x_corrected - 50, y_corrected - 50)); // 50 px offset
       
       window.display();
     }
