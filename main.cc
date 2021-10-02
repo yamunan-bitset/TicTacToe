@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 
 #include "sprite.hh"
 #include "board.hh"
@@ -12,6 +13,10 @@ int main(int argc, char** argv, char** envp)
 
   bool draw_x = false, draw_o = false;
   float x_pos, y_pos;
+  std::vector<sf::CircleShape> circles;
+  std::vector<float> xX;
+  std::vector<float> yX;
+  
   sf::Event event;
   while (window.isOpen())
     {
@@ -55,17 +60,29 @@ int main(int argc, char** argv, char** envp)
       if (y_pos >= 300 && y_pos <= 600) y_corrected = 450;
       if (x_pos >= 600 && x_pos <= 900) x_corrected = 750;
       if (y_pos >= 600 && y_pos <= 900) y_corrected = 750;
-      
+
       if (draw_x)
 	{
-	  window.draw(CreateX1(x_corrected, y_corrected));
-	  window.draw(CreateX2(x_corrected, y_corrected));
-	  window.draw(CreateX3(x_corrected, y_corrected));
-	  window.draw(CreateX4(x_corrected, y_corrected));
+	  xX.push_back(x_corrected);
+	  yX.push_back(y_corrected);
+	  for (auto i : xX)
+	    {
+	      for (auto j : yX)
+		{
+		  window.draw(CreateX1(i, j));
+		  window.draw(CreateX2(i, j));
+		  window.draw(CreateX3(i, j));
+		  window.draw(CreateX4(i, j));
+		}
+	    }
 	}
       
       if (draw_o)
-	window.draw(CreateO(x_corrected - 50, y_corrected - 50)); // 50 px offset
+	{
+	  circles.push_back(CreateO(x_corrected - 50, y_corrected - 50)); // 50 px offset
+	  for (auto i : circles)
+	    window.draw(i);
+	}
       
       window.display();
     }
