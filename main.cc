@@ -65,24 +65,27 @@ int main(int argc, char** argv, char** envp)
 	{
 	  xX.push_back(x_corrected);
 	  yX.push_back(y_corrected);
-	  for (auto i : xX)
-	    {
-	      for (auto j : yX)
-		{
-		  window.draw(CreateX1(i, j));
-		  window.draw(CreateX2(i, j));
-		  window.draw(CreateX3(i, j));
-		  window.draw(CreateX4(i, j));
-		}
-	    }
+	  draw_x = false;
 	}
       
       if (draw_o)
 	{
 	  circles.push_back(CreateO(x_corrected - 50, y_corrected - 50)); // 50 px offset
-	  for (auto i : circles)
-	    window.draw(i);
+	  draw_o = false;
 	}
+      
+      for (auto i : xX)
+	{
+	  for (auto j : yX)
+	    {
+	      window.draw(CreateX1(i, j));
+	      window.draw(CreateX2(i, j));
+	      window.draw(CreateX3(i, j));
+	      window.draw(CreateX4(i, j));
+	    }
+	}
+      for (auto i : circles)
+	window.draw(i);
       
       window.display();
     }
