@@ -113,7 +113,7 @@ int main(int argc, char** argv, char** envp)
 	      computer_xy.push_back(std::pair<float, float> (x, y));
 	      break;
 	    case 2: 
-	      if (circles[0].getPosition().x == 400 || circles[0].getPosition().y == 400)
+	      if (circles[turn - 1 - 1].getPosition().x == 400 || circles[turn - 1 - 1].getPosition().y == 400)
 		{
 		  // TODO: Find Algorithm for inversing pos instead of doing it manually
 		  if (computer_xy[computer_xy.size() - 1] == std::pair<float, float> (750, 150))
@@ -125,6 +125,24 @@ int main(int argc, char** argv, char** envp)
 		  if (computer_xy[computer_xy.size() - 1] == std::pair<float, float> (750, 750))
 		    computer_xy.push_back(std::pair<float, float> (150, 150));
 		}
+	      // TODO: If player played in corner.
+	      break;
+	    case 3:
+	      if (circles[turn - 1 - 1].getPosition().x == 400)
+		{
+		  if ((circles[turn - 1 - 1].getPosition().y - 500) < 0)
+		    computer_xy.push_back(std::pair<float, float> (x + 500, y));
+		  else
+		    computer_xy.push_back(std::pair<float, float> (x - 500, y));
+		}
+	      if (circles[turn - 1 - 1].getPosition().y == 400)
+		{
+		  if ((circles[turn - 1 - 1].getPosition().y - 500) < 0)
+		    computer_xy.push_back(std::pair<float, float> (x, y + 500));
+		  else
+		    computer_xy.push_back(std::pair<float, float> (x, y - 500));
+		}
+	      // TODO: Other options
 	    }
 	  player_turn = true;
 	}
