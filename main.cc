@@ -113,7 +113,7 @@ int main(int argc, char** argv, char** envp)
 	      computer_xy.push_back(std::pair<float, float> (x, y));
 	      break;
 	    case 2: 
-	      if (circles[turn - 1 - 1].getPosition().x == 400 || circles[turn - 1 - 1].getPosition().y == 400)
+	      if (circles[turn - 1 - 1].getPosition().x == 400 && circles[turn - 1 - 1].getPosition().y == 400)
 		{
 		  // TODO: Find Algorithm for inversing pos instead of doing it manually
 		  if (computer_xy[computer_xy.size() - 1] == std::pair<float, float> (750, 150))
@@ -125,7 +125,39 @@ int main(int argc, char** argv, char** envp)
 		  if (computer_xy[computer_xy.size() - 1] == std::pair<float, float> (750, 750))
 		    computer_xy.push_back(std::pair<float, float> (150, 150));
 		}
-	      // TODO: If player played in corner.
+	      if (
+		  //  O |   |
+		  // ---|---|---
+		  //    |   |
+		  // ---|---|---
+		  //    |   | X
+		  circles[turn - 1 - 1].getPosition().x == 150 && circles[turn - 1 - 1].getPosition().y == 150
+		  //    |   |
+		  // ---|---|---
+		  //    |   |
+		  // ---|---|---
+		  //  O |   | X
+		  || circles[turn - 1 - 1].getPosition().x == 150 && circles[turn - 1 - 1].getPosition().y == 750
+		  //    |   | O
+		  // ---|---|---
+		  //    |   |
+		  // ---|---|---
+		  //    |   | X
+		  || circles[turn - 1 - 1].getPosition().x == 750 && circles[turn - 1 - 1].getPosition().y == 150
+		  //  X |   |
+		  // ---|---|---
+		  //    |   |  
+		  // ---|---|---
+		  //    |   | O 
+		  || circles[turn - 1 - 1].getPosition().x == 750 && circles[turn - 1 - 1].getPosition().y == 750)
+		{
+		  int c_x, c_y;
+		  c_x = computer_xy[computer_xy.size() - 1].first;
+		  c_y = 400;
+		  // FIXME: Not Reached
+		  std::cout << c_x << ", " << c_y << std::endl;
+		  computer_xy.push_back(std::pair<float, float> (c_x, c_y));
+		}
 	      break;
 	    case 3:
 	      if (circles[turn - 1 - 1].getPosition().x == 400)
